@@ -1,25 +1,43 @@
 ﻿@model LoginSystem.ViewModels.RegistroViewModel
 
-<form asp-action="Registro" method="post">
-    <div>
-        <label asp-for="Nome"></label>
-        <input asp-for="Nome" />
-        <span asp-validation-for="Nome"></span>
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<div class="d-flex justify-content-center align-items-center w-100 h-100" style="min-height: 100%">
+    <div class="card shadow border-0 w-100" style="max-width: 400px;">
+        <div class="card-body p-4">
+            <div class="text-center mb-4">
+                <img src="/img/logo.png" alt="logo" class="logo-navbar mb-2" />
+            </div>
+            <h4 class="text-center mb-4 fw-bold">Registro</h4>
+            <form asp-action="Registro" method="post" autocomplete="off">
+                <div class="mb-3">
+                    <input asp-for="Nome" class="form-control form-control-lg" placeholder="Nome" />
+                    <span asp-validation-for="Nome" class="text-danger small"></span>
+                </div>
+                <div class="mb-3">
+                    <input asp-for="Email" class="form-control form-control-lg" placeholder="Email" />
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+                <div class="mb-3">
+                    <input asp-for="Senha" class="form-control form-control-lg" placeholder="Senha" type="password" />
+                    <span asp-validation-for="Senha" class="text-danger small"></span>
+                </div>
+                <div class="mb-4">
+                    <input asp-for="ConfirmarSenha" class="form-control form-control-lg" placeholder="Confirme a senha" type="password" />
+                    <span asp-validation-for="ConfirmarSenha" class="text-danger small"></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">Registrar</button>
+            </form>
+            <div class="text-center">
+                <span>Já possui conta? </span>
+                <a asp-action="Index" asp-controller="Login" class="fw-bold text-primary text-decoration-none">Login</a>
+            </div>
+        </div>
     </div>
-    <div>
-        <label asp-for="Email"></label>
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div>
-        <label asp-for="Senha"></label>
-        <input asp-for="Senha" type="password" />
-        <span asp-validation-for="Senha"></span>
-    </div>
-    <div>
-        <label asp-for="ConfirmarSenha"></label>
-        <input asp-for="ConfirmarSenha" type="password" />
-        <span asp-validation-for="ConfirmarSenha"></span>
-    </div>
-    <button type="submit">Cadastrar</button>
-</form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

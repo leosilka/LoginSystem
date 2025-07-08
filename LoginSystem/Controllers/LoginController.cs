@@ -46,6 +46,8 @@ public class LoginController : Controller
 
         await _usuarioRepository.AdicionarAsync(usuario);
 
+        TempData["RegistroSucesso"] = true;
+
         return RedirectToAction("Index", "Login");
     }
 

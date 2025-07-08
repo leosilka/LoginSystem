@@ -1,8 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Bem-vindo ao LoginSystem";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center py-5">
+    <img src="/img/logo.png" alt="Logo LoginSystem" class="mb-4" style="max-width: 120px;" />
+    <h1 class="display-4 fw-bold mb-3">Bem-vindo ao LoginSystem!</h1>
+    <p class="lead mb-4">
+        Gerencie seu acesso de forma simples, segura e moderna.<br />
+        Cadastre-se ou faça login para acessar o painel do sistema.
+    </p>
+    <div class="d-flex justify-content-center gap-3">
+        <a class="btn btn-primary btn-lg" asp-controller="Login" asp-action="Registro">Registrar</a>
+        <a class="btn btn-outline-primary btn-lg" asp-controller="Login" asp-action="Index">Login</a>
+    </div>
 </div>

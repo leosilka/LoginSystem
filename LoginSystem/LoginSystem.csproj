@@ -20,4 +20,9 @@
     <ProjectReference Include="..\LoginSystem.Infra\LoginSystem.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\gif\" />
+  </ItemGroup>
+
 </Project>
