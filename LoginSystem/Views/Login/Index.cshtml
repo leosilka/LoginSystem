@@ -7,11 +7,26 @@
             <div class="toast-header">
                 <img src="/gif/sucesso.gif" class="rounded me-2" alt="Logo" style="height: 24px; width: 24px;" />
                 <strong class="me-auto">LoginSystem</strong>
-                <small class="text-muted">Agora</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Fechar"></button>
             </div>
             <div class="toast-body text-bg-success">
                 Cadastro realizado com sucesso!
+            </div>
+        </div>
+    </div>
+}
+
+@if (TempData["ErroLogin"] != null)
+{
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toastErroLogin" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+            <div class="toast-header">
+                <img src="/gif/alerta-de-seguranca.gif" class="rounded me-2" alt="Logo" style="height: 24px; width: 24px;" />
+                <strong class="me-auto">LoginSystem</strong>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+            </div>
+            <div class="toast-body text-bg-danger">
+                "Usuário ou senha inválidos."
             </div>
         </div>
     </div>
@@ -33,7 +48,10 @@
                     <input asp-for="Senha" class="form-control form-control-lg" placeholder="Senha" type="password" />
                     <span asp-validation-for="Senha" class="text-danger small"></span>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">Entrar</button>
+                <button id="btnLogin" class="btn btn-primary btn-lg w-100 mb-3" type="submit">
+                    <span id="spinnerLogin" class="spinner-border spinner-border-sm me-2 d-none" aria-hidden="true"></span>
+                    <span id="btnLoginText">Entrar</span>
+                </button>
             </form>
             <div class="text-center">
                 <span>Não possui conta? </span>
@@ -46,10 +64,30 @@
 @section Scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var toastEl = document.getElementById('liveToast');
-            if (toastEl) {
-                var toast = new bootstrap.Toast(toastEl, { delay: 5000 });
-                toast.show();
+            // Toasts
+            var toastIds = ['liveToast', 'toastErroLogin'];
+            toastIds.forEach(function(id) {
+                var toastEl = document.getElementById(id);
+                if (toastEl) {
+                    var toast = new bootstrap.Toast(toastEl, { delay: 5000 });
+                    toast.show();
+                }
+            });
+
+            // Spinner
+            var form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function() {
+                    var btn = document.getElementById('btnLogin');
+                    var spinner = document.getElementById('spinnerLogin');
+                    var btnText = document.getElementById('btnLoginText');
+
+                    if (btn && spinner && btnText) {
+                        btn.disabled = true;
+                        spinner.classList.remove('d-none');
+                        btnText.textContent = 'Entrando...';
+                    }
+                });
             }
         });
     </script>

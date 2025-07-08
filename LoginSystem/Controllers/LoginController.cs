@@ -61,7 +61,7 @@ public class LoginController : Controller
 
         if (usuario == null || !BCrypt.Net.BCrypt.Verify(model.Senha, usuario.Senha))
         {
-            ModelState.AddModelError(string.Empty, "Usuário ou senha inválidos.");
+            TempData["ErroLogin"] = true;
             return View(model);
         }
 
@@ -76,8 +76,8 @@ public class LoginController : Controller
 
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentify));
 
-        // Redireciona para o Dashboard
-        return RedirectToAction("Dashboard", "Account");
+        // Redireciona para o Index de Account
+        return RedirectToAction("Index", "Account");
     }
 
     [HttpPost]
