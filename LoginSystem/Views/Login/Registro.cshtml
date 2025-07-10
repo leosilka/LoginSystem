@@ -28,7 +28,11 @@
                     <input asp-for="ConfirmarSenha" class="form-control form-control-lg" placeholder="Confirme a senha" type="password" />
                     <span asp-validation-for="ConfirmarSenha" class="text-danger small"></span>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">Registrar</button>
+                <button id="btnRegistrar" type="submit" class="btn btn-primary btn-lg w-100 mb-3">
+                    <span id="spinnerRegistrar" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+                    <span id="btnRegistrarText">Registrar</span>
+                </button>
+                @* <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">Registrar</button> *@
             </form>
             <div class="text-center">
                 <span>Já possui conta? </span>
@@ -40,4 +44,22 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function () {
+                    var btn = document.getElementById('btnRegistrar');
+                    var spinner = document.getElementById('spinnerRegistrar');
+                    var btnText = document.getElementById('btnRegistrarText');
+                    if (btn && spinner && btnText) {
+                        btn.disabled = true;
+                        spinner.classList.remove('d-none');
+                        btnText.textContent = 'Registrando...';
+                    }
+                });
+            }
+        });
+    </script>
 }
